@@ -1,102 +1,47 @@
-:root {
-    --cor-de-fundo: #1E1E1E;
-    --verde: #6FFF57;
-    --branco: #FFFFFF;
-    --botao-ativo: #3A375E;
-    --botao-inativo: rgba(58, 55, 94, 0.5);
-    --texto-fundo: rgba(58, 55, 94, 0.3);
-}
-body{
-    background-color: var(--cor-de-fundo);
-    color: var(--branco);
-    font-family: 'Chakra Petch',sans-serif;
-}
-.conteudo-principal{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-}
-.titulo-principal{
-    text-align: left;
-    width: 100%;
-    font-size: 32px;
-}
-.titulo-principal span{
-    color: var(--verde);
-}
+const botoes = document.querySelectorAll(".botao");
 
-.botao{
-    font-family: "Crakra Petch", sans-serif;
-    background-color: var(--botao-inativo);
-    color: var(--branco);
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    font-size: 18px;
-    align-items: center;
-    width: 100%;
-    border-bottom: 4px solid var(--botao-ativo);
-    border-left: 4px solid var(--botao-ativo);
-    border-right: 4px solid var(--botao-ativo);
-    border-top: none;
-}
+const textos = document.querySelectorAll(".aba-conteudo");
 
-.botao:first-child{
-    border-radius:40px 40px 0 0;
-}
+for (let i = 0; i < botoes.length; i++) {
+    botoes[i].onclick = function () {
 
-.botoes{
-    display: block;
-}
+        for (let j = 0; j < botoes.length; j++) {
+            botoes[j].classList.remove("ativo");
+            textos[j].classList.remove("ativo");
 
-.botao.ativo{
-    background-color: var(--botao-ativo);
-    border-bottom: 4px solid var(--verde);
-}
+        }
 
-.abas-textos{
-    background-color: var(--texto-fundo);
-    padding: 40px;
-    border-radius: 0 0 40px 40px;
-}
-.aba-conteudo.ativo{
-    display: block;
-}
+        botoes[i].classList.add("ativo");
+        textos[i].classList.add("ativo");
 
-.aba-conteudo{
-    display: none;
-}
-
-.aba-conteudo-titulo-principal{
-    font-size: 28px;
-    text-align: center;
-}
-.aba-conteudo-titulo-secundario{
-    text-align: center;
-    color: var(--verde);
-    text-transform: uppercase;
-}
-
-@media screen and (min-width: 768px) {
-    .botoes {
-        display: flex;
     }
 
-    .botao:first-child {
-        border-radius: 40px 0 0 0;
-        
-    }
-    .botao:last-child {
-        border-radius: 0 40px 0 0;
-    }
+}
+const contadores = document.querySelectorAll(".contador");
+const tempoAtual = new Date();// retorna a data atual do computador
+const tempoObjetivo1 = new Date("2024-05-01t06:00:00");
+const tempoObjetivo2 = new Date("2024-06-02t07:00:00");
+const tempoObjetivo3 = new Date("2024-07-03t08:00:00");
+const tempoObjetivo4 = new Date("2024-08-04t09:00:00");
+const tempos = [tempoObjetivo1, tempoObjetivo2, tempoObjetivo3, tempoObjetivo4]
+
+function calculatempo(tempoObjetivo) {
+    let tempoFinal = tempoObjetivo - tempoAtual;
+
+    let segundos = Math.floor(tempoFinal / 1000);
+    let minutos = Math.floor(segundos / 60);
+    let horas = Math.floor(minutos / 60);
+    let dias = Math.floor(horas / 24);
+
+    segundos %= 60;
+    minutos %= 60;
+    horas %= 24;
+
+    return dias + " Dias " + horas + " Horas " + minutos + " Minutos " + segundos + " Segundos";
+
 }
 
-.contador{
-    text-align: center;
-    font-size: 30px;
-    color: var(--branco);
+for (let i = 0; i < contadores.length; i++) {
+
+    contadores[i].textContent = calculatempo(tempos[i]);
 }
